@@ -1,0 +1,43 @@
+###Jessie Rippel##
+##Magic_hand class in Magic module##
+##Python 3.3.2
+
+##Class contains data attributes. Should be implemented per instance as they are
+##variable owned attributes, particular to each hand. The stack-like structure allows for
+#the same feeling of privacy in keeping the contents of your hand seperate from
+#another player's view. 
+
+from random import randint
+
+class Magic_hand:
+    
+    def __init__(self, n):  #Must add player's name to keep track of the hand instance.
+        self.cards = []
+        self.player_name = n
+
+    def isEmpty(self):  #Hands are empty by default until cards are drawn. 
+        return self.cards == []
+
+    def draw (self, card): #Must draw 7 cards to begin i.e. "card 1", "card 2", etc.
+        self.cards.append(card)
+
+    def play (self, card):
+        return self.cards.remove(card)
+
+    def peek_at_hand(self):   ##View the last card added to your hand.
+        return self.cards[len(self.cards)-1]
+
+    def tutor(self, card):     #Tutor inserts a card at the 1st index of list or "hand" akin to draw.
+        return self.cards.insert(0,card)
+
+    def size_hand(self):
+        return len(self.cards)
+
+    def discard (self, card):
+        return self.cards.remove(card)
+    
+    def mill(self):     #mill adds a random, numbered card to your hand from a library of 62 cards.
+        random_card= "card " + str(randint(7,63))
+        milled= self.cards.append(random_card)
+        return milled
+
