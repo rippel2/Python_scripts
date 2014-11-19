@@ -1,0 +1,23 @@
+##Jessica Rippel##
+##Call Me Ishmael##
+##Python 3.2#####
+
+
+##Reads a file to find lines containing the phrase 'Call me Ishmael.' Labels lines not contaning the phrase
+##with a random letter and labels them as "NOT ISHMAEL."
+
+
+import random
+
+
+def ishmael(fileref):
+    c = 'Call me Ishmael.'
+    s = ''
+    fileref = open(fileref, 'r')
+    for s in fileref:
+        if c not in s:
+            r= chr(random.randint(97,122))
+            print ("RAND. LETTER","      ", "NOT ISHMAEL")   
+            print (r, "                            ", s)
+        else:
+            print (s)
