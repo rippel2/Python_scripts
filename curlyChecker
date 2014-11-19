@@ -1,0 +1,63 @@
+##Jessica Rippel##
+##curlyChecker checks for pairs of curly brackets in a text file of dictionaries##
+##Tested on Python 2.7.5##
+##10/24/2013##
+
+import Stack #Imported Stack module
+import re   #Imported re for substituting non curly bracket characters
+
+def main():
+    fileref= 'Rippel_Jessica_Midterm_4_testfile'
+    print ('fileref= Rippel_Jessica_Midterm_4_testfile') ##Test case
+    fileref = open (fileref, 'r')
+    astring= fileref.read()
+    print 'astring =', astring 
+    fileref.close()
+    balanced= curlyChecker(astring,cleandict)
+
+    print 'Balanced:' + str(balanced)
+    
+
+def cleandict(astring): #Defined the function cleandict, which will clear
+                               # all non-brackets from the file.
+    for char in astring:
+        if char !="{":
+            if char !="}":
+                 astring= re.sub(char, '', astring)
+                 print astring
+    return(astring)
+
+def curlyChecker (astring,cleandict):    
+    s = Stack.Stack()#Qualified Stack method within Stack module
+    symbolString= cleandict(astring)
+    print (symbolString)
+    balanced = True #Initialized balanced to True until proven False by condition statements.
+    index = 0 #Initialized index to 0
+    while index < len(symbolString) and balanced: #The while loop will iterate through each
+                                                  #string, indexing each character as long as
+                                                  # the length of the string is longer than 0 characters.
+        symbol = symbolString[index] #Each indexed character in the string is assigned
+                                     # to the variable 'symbol.'
+        if symbol =='{':             #If the symbol is an opening curly bracket,
+                                      #add it to the stack 's'.
+            s.push(symbol)
+        else:                         #Else, if the string is empty, the stack is empty and unbalanced.
+            if s.isEmpty():
+                balanced= False
+            else:                   #Else, remove symbol from the stack.
+                                    
+                s.pop()
+
+        index= index + 1            #Accumulator iterates through each indexed character one by one.
+
+    if balanced and s.isEmpty():  #If there are no remaining characters in the stack,
+                                  #the curly brackets are correctly paired.
+        return True
+    else:
+        return False
+
+if __name__== "main__":
+    main()
+
+            
+
